@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h1 {
+            margin-bottom: 20px;
+        }
+        .file-input {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .file-input input[type="file"] {
+            display: none;
+        }
+        .file-input label {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .file-input span {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .image-list {
+            margin-top: 20px;
+        }
+        .image-list img {
+            max-width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Upload Your Images</h1>
+        <form action="your-server-side-script" method="post" enctype="multipart/form-data">
+            <div class="file-input">
+                <label for="image-upload">Browse and Upload Images</label>
+                <input type="file" id="image-upload" name="images" accept="image/*" multiple onchange="updateImageList()">
+                <span id="image-upload-label">No files chosen</span>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div class="image-list" id="image-list"></div>
+    </div>
+
+    <script>
+        function updateImageList() {
+            const input = document.getElementById('image-upload');
+            const label = document.getElementById('image-upload-label');
+            const imageList = document.getElementById('image-list');
+            const files = input.files;
+            
+            if (files.length > 0) {
+                label.textContent = files.length + ' files chosen';
+                imageList.innerHTML = '';
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        imageList.appendChild(img);
+                    }
+
+                    reader.readAsDataURL(file);
+                }
+            } else {
+                label.textContent = 'No files chosen';
+                imageList.innerHTML = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
