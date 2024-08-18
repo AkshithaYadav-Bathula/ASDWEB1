@@ -1,1 +1,2 @@
-# ASDWEB1
+# ASD Detection Using Convolutional Neural Networks (CNN)
+This project focuses on the early detection of Autism Spectrum Disorder (ASD) using Convolutional Neural Networks (CNN) applied to facial image analysis. The model analyzes various facial features to identify patterns that may indicate ASD. The repository contains the model's implementation in Python, along with a web interface for ease of use. The goal is to assist in early intervention by providing an accessible tool for ASD detection.
